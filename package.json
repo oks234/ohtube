@@ -1,0 +1,19 @@
+{
+  "name": "ohtube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oks234/ohtube.git"
+  },
+  "author": "Kyungseok Oh<bestspx@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oks234/ohtube/issues"
+  },
+  "homepage": "https://github.com/oks234/ohtube#readme",
+  "description": ""
+}
