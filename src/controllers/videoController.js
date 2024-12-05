@@ -1,7 +1,7 @@
 import Video from "../models/Video";
 
 export const trending = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = async (req, res) => {
@@ -61,4 +61,12 @@ export const deleteVideo = async (req, res) => {
   console.log(id);
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
+};
+
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  if (keyword) {
+
+  }
+  return res.render("search");
 };
