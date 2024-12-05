@@ -2,7 +2,6 @@ import Video from "../models/Video";
 
 export const trending = async (req, res) => {
   const videos = await Video.find({});
-  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = async (req, res) => {
@@ -34,9 +33,7 @@ export const postEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: hashtags
-      .split(",")
-      .map((word) => (word.startsWith("#") ? word : `#${word}`)),
+    hashtags
   });
   return res.redirect(`/videos/${id}`);
 };
@@ -49,9 +46,7 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      hashtags: hashtags
-        .split(",")
-        .map((word) => (word.startsWith("#") ? word : `#${word}`)),
+      hashtags,
     });
     return res.redirect("/");
   } catch (error) {
