@@ -49,15 +49,17 @@ export const postUpload = async (req, res) => {
     file: { path: fileUrl },
   } = req;
   const { title, description, hashtags } = req.body;
-  console.log(owner);
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       title,
       description,
       fileUrl,
       owner,
       hashtags: Video.formatHashtags(hashtags),
     });
+    const user = await User.findById(owner);
+    user.videos.push(newVideo._id);
+    await user.save();
     return res.redirect("/");
   } catch (error) {
     console.log(error);
