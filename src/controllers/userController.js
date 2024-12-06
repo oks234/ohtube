@@ -37,7 +37,6 @@ export const postEdit = async (req, res) => {
     body: { email, name, location },
     file,
   } = req;
-  console.log(file);
   const emailExists = email !== req.session.user.email && await User.exists({ email });
   if (emailExists) {
     return res.render("edit-profile", {
@@ -45,7 +44,6 @@ export const postEdit = async (req, res) => {
       errorMessage: `The email ("${email}") is already exists.`,
     });
   }
-
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
