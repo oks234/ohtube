@@ -8,3 +8,6 @@ block content
     input(placeholder="name" name="name" type="text" required value=loggedInUser.name)
     input(placeholder="location" name="location" type="text" value=loggedInUser.location)
     button(type="submit") Update Profile
+    if !loggedInUser.socialOnly
+      hr
+      a(href="change-password") Change Password
