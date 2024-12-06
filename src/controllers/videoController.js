@@ -7,15 +7,13 @@ export const trending = async (req, res) => {
 };
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id);
-  const owner = await User.findById(video.owner);
+  const video = await Video.findById(id).populate("owner");
   if (!video) {
     return res.render("404", { pageTitle: "Video not found" });
   }
   res.render("watch", {
     pageTitle: `Watch ${video.title}`,
     video,
-    owner,
   });
 };
 export const getEdit = async (req, res) => {
