@@ -32,27 +32,31 @@ export const getEdit = (req, res) =>
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { email, name, location },
+    file,
   } = req;
-  const emailExists = await User.exists({ email });
+  console.log(file);
+  const emailExists = email !== req.session.user.email && await User.exists({ email });
   if (emailExists) {
     return res.render("edit-profile", {
       pageTitle: "Edit Profile",
       errorMessage: `The email ("${email}") is already exists.`,
     });
   }
-  const user = await User.findByIdAndUpdate(
+
+  const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       location,
     },
     { new: true }
   );
-  req.session.user = user;
+  req.session.user = updatedUser;
   return res.render("edit-profile");
 };
 export const remove = (req, res) => res.send("Remove user");
