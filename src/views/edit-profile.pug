@@ -1,6 +1,8 @@
 extends base.pug
 
 block content
+  if errorMessage
+    small=errorMessage
   form(method="POST")
     input(placeholder="email" name="email" type="email" required value=loggedInUser.email)
     input(placeholder="name" name="name" type="text" required value=loggedInUser.name)
