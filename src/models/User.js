@@ -14,10 +14,11 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.pre("save", async function () {
-  const salt = await bcrypt.genSalt(saltRounds);
-  const hash = await bcrypt.hash(this.password || "", salt);
-  this.password = hash;
-  this.location = null;
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(this.password || "", salt);
+    this.password = hash;
+  }
 });
 
 const User = mongoose.model("User", userSchema);
