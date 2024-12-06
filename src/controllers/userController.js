@@ -29,7 +29,20 @@ export const postJoin = async (req, res) => {
 };
 export const getEdit = (req, res) =>
   res.render("edit-profile", { pageTitle: "Edit Profile" });
-export const postEdit = (req, res) => res.end();
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { email, name, location },
+  } = req;
+  const user = await User.findByIdAndUpdate(_id, {
+    name,
+    email,
+    location,
+  });
+  return res.render("edit-profile");
+};
 export const remove = (req, res) => res.send("Remove user");
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
