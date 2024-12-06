@@ -27,7 +27,9 @@ export const postJoin = async (req, res) => {
     });
   }
 };
-export const edit = (req, res) => res.send("Edit user");
+export const getEdit = (req, res) =>
+  res.render("edit-profile", { pageTitle: "Edit Profile" });
+export const postEdit = (req, res) => res.end();
 export const remove = (req, res) => res.send("Remove user");
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Login" });
@@ -117,7 +119,7 @@ export const finishGithubLogin = async (req, res) => {
     req.session.user = user;
     res.redirect("/");
   } else {
-      // set notification
+    // set notification
     return res.redirect("/login");
   }
 };
