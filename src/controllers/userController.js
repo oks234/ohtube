@@ -101,27 +101,27 @@ export const finishGithubLogin = async (req, res) => {
     if (!emailObj) {
       return res.redirect("/login");
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      res.redirect("/");
-    } else {
-      const user = await User.create({
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
+      user = await User.create({
         email: emailObj.email,
+        avatarUrl: userData.avatar_url,
         username: userData.login,
         password: "",
         socialOnly: true,
         name: userData.name,
         location: userData.location || "",
       });
-      req.session.loggedIn = true;
-      req.session.user = user;
-      res.redirect("/");
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    res.redirect("/");
   } else {
     return res.redirect("/login");
   }
 };
-export const logout = (req, res) => res.send("Logout");
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 export const see = (req, res) => res.send("See user");
