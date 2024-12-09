@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/init.js"
+    "dev": "nodemon --exec babel-node ./src/init.js",
+    "assets": "webpack --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,9 @@
     "@babel/core": "^7.26.0",
     "@babel/node": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
-    "nodemon": "^3.1.7"
+    "babel-loader": "^9.2.1",
+    "nodemon": "^3.1.7",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   }
 }
