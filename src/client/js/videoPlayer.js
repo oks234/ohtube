@@ -3,8 +3,9 @@ console.log("videoPlayer");
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
-const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
 
 let volumeValue = 0.5;
 video.volume = volumeValue;
@@ -34,7 +35,15 @@ const handleVolueRangeInput = (e) => {
   volumeValue = value;
   video.volute = value;
 };
+const handleVideoLoadedMetadata = () => {
+  totalTime.innerText = Math.floor(video.duration);
+};
+const handleVideoTimeupdate = () => {
+  currentTime.innerText = Math.floor(video.currentTime);
+};
 
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolueRangeInput);
+video.addEventListener("loadedmetadata", handleVideoLoadedMetadata);
+video.addEventListener("timeupdate", handleVideoTimeupdate);
