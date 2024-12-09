@@ -2,7 +2,7 @@ extends base.pug
 include ./mixins/icons.pug
 
 block content
-  div#videoContainer
+  div#videoContainer(data-id=video._id)
     .videoWrapper
       video(src="/" + video.fileUrl)
       button#playOnVideo.playBtnOnVideo

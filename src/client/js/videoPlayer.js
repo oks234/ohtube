@@ -91,36 +91,42 @@ const handleVideoContainerFullScreenChange = () => {
     document.fullscreenElement !== null
   );
 };
+const handleKeyPress = (e) => {
+  if (e.code === "Space") {
+    e.preventDefault();
+    return handlePlayBtnClick();
+  }
+
+  if (e.code === "KeyF") {
+    e.preventDefault();
+    return handleFullScreenBtnClick();
+  }
+
+  if (e.code === "KeyM") {
+    e.preventDefault();
+    return handleMuteBtnClick();
+  }
+};
+const handleVideoEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, { method: "POST" });
+};
 
 playBtn.addEventListener("click", handlePlayBtnClick);
 playOnVideoBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
 volumeRange.addEventListener("input", handleVolueRangeInput);
-video.addEventListener("loadedmetadata", handleVideoLoadedMetadata);
-video.addEventListener("timeupdate", handleVideoTimeupdate);
 timelineRange.addEventListener("input", handleTimelineRangeInput);
 fullScreenBtn.addEventListener("click", handleFullScreenBtnClick);
-videoContainer.addEventListener("mousemove", handleVideoContainerMouseMove);
-videoContainer.addEventListener("mouseleave", handleVideoContainerMouseLeave);
+video.addEventListener("ended", handleVideoEnded);
+video.addEventListener("loadedmetadata", handleVideoLoadedMetadata);
+video.addEventListener("timeupdate", handleVideoTimeupdate);
 video.addEventListener("pause", handleVideoPause);
 video.addEventListener("play", handVideoPlay);
+videoContainer.addEventListener("mousemove", handleVideoContainerMouseMove);
+videoContainer.addEventListener("mouseleave", handleVideoContainerMouseLeave);
 videoContainer.addEventListener(
   "fullscreenchange",
   handleVideoContainerFullScreenChange
 );
-document.addEventListener("keypress", (e) => {
-  console.log(e.code);
-  console.log(e.key);
-  if (e.code === "Space") {
-    return handlePlayBtnClick();
-  }
-
-  if (e.code === "KeyF") {
-    return handleFullScreenBtnClick();
-  }
-
-  if (e.code === "KeyM") {
-    return handleMuteBtnClick();
-  }
-});
-// Play/Pause Video by Spacebar, Video Click
+document.addEventListener("keypress", handleKeyPress);
