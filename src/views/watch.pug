@@ -1,20 +1,38 @@
 extends base.pug
+include ./mixins/icons.pug
 
 block content
   div#videoContainer
-    video(src="/" + video.fileUrl controls width="100%")
-    div#videoControls
-      button#play Play
-      button#mute Mute 
-      input#volume(type="range" step="0.1" min="0" max="1" value="0.5")
-      div
-        span#currentTime 00:00
-        span  / 
-        span#totalTime 00:00
-      div
-        input#timeline(type="range" step="1" min="0" value="0")
-      div
-        button#fullScreen Enter Full Screen
+    .videoWrapper
+      video(src="/" + video.fileUrl)
+      button#playOnVideo.playBtnOnVideo
+        span.playIcon
+          +playIcon
+        span.pauseIcon
+          +pauseIcon
+      div#videoControls.videoControls
+        button#play
+          span.playIcon
+            +playIcon
+          span.pauseIcon
+            +pauseIcon
+        button#mute
+          span.muteIcon
+            +muteIcon
+          span.speakerIcon
+            +speakerIcon
+        input#volume.volume(type="range" step="0.1" min="0" max="1" value="0.5")
+        div
+          span#currentTime 00:00
+          span  / 
+          span#totalTime 00:00
+        input#timeline.timeline(type="range" step="1" min="0" value="0")
+        div
+          button#fullScreen
+            span.enterFullScreenIcon
+              +enterFullScreenIcon
+            span.exitFullScreenIcon
+              +exitFullScreenIcon
   //-
     div
       p=video.description

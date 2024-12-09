@@ -2,6 +2,7 @@
 @import "./config/_variables";
 
 @import "./components/header";
+@import "./components/videoPlayer.scss";
 
 body {
   background-color: $bg;

@@ -1,0 +1,142 @@
+#videoContainer {
+  $transition: opacity 0.5s ease-in-out;
+  position: relative;
+
+  video {
+    width: 100%;
+  }
+
+  button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: $color;
+    width: 24px;
+
+    span,
+    svg {
+      pointer-events: none;
+    }
+
+    &.playBtnOnVideo {
+      transition: $transition;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 96px;
+      }
+    }
+
+    &:hover {
+      color: $color--hovered;
+    }
+
+    &.showing {
+      opacity: 1;
+    }
+  }
+
+  .videoControls {
+    $around: 24px;
+    $inner-x: 18px;
+    $inner-y: 12px;
+    transition: $transition;
+    opacity: 0;
+    position: absolute;
+    bottom: $around;
+    left: $around;
+    right: $around;
+    padding: $inner-y 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: $bg;
+    border-radius: 24px;
+
+    input {
+      margin: 0;
+    }
+
+    &>* {
+      &:not(.timeline) {
+        flex-shrink: 0;
+      }
+
+      &:first-child {
+        margin-left: $inner-x;
+      }
+
+      &:last-child {
+        margin-right: $inner-x;
+      }
+    }
+
+    &.showing {
+      opacity: 1;
+    }
+  }
+
+  .pauseIcon,
+  .muteIcon,
+  .exitFullScreenIcon {
+    display: none;
+  }
+
+  .volume {
+    width: 80px;
+  }
+
+  .timeline {
+    flex-grow: 1;
+  }
+
+  &.playing {
+    .playIcon {
+      display: none;
+    }
+
+    .pauseIcon {
+      display: block;
+    }
+  }
+
+  &.muted {
+    .speakerIcon {
+      display: none;
+    }
+
+    .muteIcon {
+      display: block;
+    }
+  }
+
+  &.fullScreen {
+    display: flex;
+    align-items: center;
+
+    .videoWrapper {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .enterFullScreenIcon {
+      display: none;
+    }
+
+    .exitFullScreenIcon {
+      display: block;
+    }
+  }
+}
