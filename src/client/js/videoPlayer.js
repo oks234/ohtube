@@ -4,26 +4,27 @@ const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
 const time = document.getElementById("time");
-const volume = document.getElementById("volume");
+const volumeRange = document.getElementById("volume");
 
 const handlePlayBtnClick = () => {
   if (video.paused) {
     video.play();
-    return;
+  } else {
+    video.pause();
   }
-  video.pause();
+  playBtn.innerText = video.paused ? "Play" : "Pause";
 };
-const handleMuteBtnClick = () => {};
-const handleVideoPause = () => {
-  playBtn.innerText = "Play";
-};
-const handleVideoPlay = () => {
-  playBtn.innerText = "Pause";
+const handleMuteBtnClick = () => {
+  if (video.muted) {
+    video.muted = false;
+  } else {
+    video.muted = true;
+  }
+  muteBtn.innerText = video.muted ? "Unmute" : "Mute";
+  volumeRange.value = video.muted ? 0 : 1;
 };
 
 playBtn.addEventListener("click", handlePlayBtnClick);
 muteBtn.addEventListener("click", handleMuteBtnClick);
-video.addEventListener("pause", handleVideoPause);
-video.addEventListener("play", handleVideoPlay);
 
 console.log({ video, play, mute, time, volume });
