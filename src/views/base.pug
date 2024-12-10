@@ -1,9 +1,17 @@
+include mixins/messages
+
 doctype html
 html(lang="ko")
   head
     title #{pageTitle} | #{siteName}
     link(rel="stylesheet" href="/static/css/styles.css")
   body 
+    if messages.error
+      +messages('error', messages.error)
+    if messages.info
+      +messages('info', messages.info)
+    if messages.success
+      +messages('success', messages.success)
     header
       h1=pageTitle
       nav
