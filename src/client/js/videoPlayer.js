@@ -129,4 +129,4 @@ videoContainer.addEventListener(
   "fullscreenchange",
   handleVideoContainerFullScreenChange
 );
-document.addEventListener("keypress", handleKeyPress);
+videoContainer.addEventListener("keypress", handleKeyPress);
