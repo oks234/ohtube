@@ -2,7 +2,9 @@
 @import "./config/_variables";
 
 @import "./components/header";
-@import "./components/videoPlayer.scss";
+@import "./components/videoPlayer";
+
+@import "./screens/watch";
 
 body {
   background-color: $bg;
