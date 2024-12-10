@@ -56,7 +56,7 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = updatedUser;
-  return res.render("edit-profile");
+  return res.redirect("/users/edit");
 };
 export const remove = (req, res) => res.send("Remove user");
 export const getLogin = (req, res) =>

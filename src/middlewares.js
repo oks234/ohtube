@@ -24,10 +24,7 @@ const s3VideoStorage = multerS3({
   bucket: "ohtube-2024",
   acl: "public-read",
   key: function (req, file, cb) {
-    cb(
-      null,
-      `videos/${req.session.user._id}/${Date.now().toString()}`
-    );
+    cb(null, `videos/${req.session.user._id}/${Date.now().toString()}`);
   },
 });
 
