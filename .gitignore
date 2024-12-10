@@ -3,3 +3,4 @@
 /assets
 /dist
 .env
+.DS_Store

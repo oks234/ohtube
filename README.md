@@ -4,6 +4,8 @@
 
 ☑️ ❌ ✅
 
+☑️ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error
+
 ☑️ styles
 
     ☑️ form
