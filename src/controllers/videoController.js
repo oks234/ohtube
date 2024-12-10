@@ -143,5 +143,5 @@ export const createComment = async (req, res) => {
   const user = await User.findById(userId);
   user.comments.push(comment._id);
   await user.save();
-  return res.sendStatus(201);
+  return res.status(201).json({ newCommentId: comment._id });
 };

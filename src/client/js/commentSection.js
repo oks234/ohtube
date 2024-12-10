@@ -1,16 +1,17 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
 
-const addComment = (text) => {
+const addComment = (text, id) => {
   const videoComments = document.querySelector(".video__comments ul");
   const chatIcon = document.querySelector(".chatIconContainer svg");
   const newComment = document.createElement("li");
   const span = document.createElement("span");
   span.innerText = text;
   newComment.className = "video__comment";
+  newComment.dataset.id = id;
   newComment.appendChild(chatIcon.cloneNode(true));
   newComment.appendChild(span);
-  videoComments.insertBefore(newComment, videoComments.childNodes.item(0));
+  videoComments.prepend(newComment);
 };
 
 const handleSubmit = async (e) => {
@@ -21,14 +22,15 @@ const handleSubmit = async (e) => {
   if (text === "") return;
 
   const videoId = videoContainer.dataset.id;
-  const { status } = await fetch(`/api/videos/${videoId}/comment`, {
+  const response = await fetch(`/api/videos/${videoId}/comment`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text }),
   });
   textarea.value = "";
-  if (status === 201) {
-    addComment(text);
+  if (response.status === 201) {
+    const { newCommentId } = await response.json();
+    addComment(text, newCommentId);
   }
 };
 

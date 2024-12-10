@@ -33,17 +33,17 @@ block content
               +enterFullScreenIcon
             span.exitFullScreenIcon
               +exitFullScreenIcon
+  div
+    p=video.description
+    small=video.createdAt
+  div
+    small Uploaded By 
+      a(href=`/users/${video.owner._id}`)=video.owner.name
+  if String(video.owner._id) === String(loggedInUser._id)
     div
-      p=video.description
-      small=video.createdAt
+      a(href=`${video.id}/edit`) Edit Video &rarr;
     div
-      small Uploaded By 
-        a(href=`/users/${video.owner._id}`)=video.owner.name
-    if String(video.owner._id) === String(loggedInUser._id)
-      div
-        a(href=`${video.id}/edit`) Edit Video &rarr;
-      div
-        a(href=`${video.id}/delete`) Delete Video &rarr;
+      a(href=`${video.id}/delete`) Delete Video &rarr;
 
   if loggedIn
     div.video__add-comments
@@ -51,11 +51,15 @@ block content
         textarea(cols="30" rows="10" placeholder="Write a comment...")
         button(type="submit") Add Comment
   div.video__comments
+    template#videoCommentTemplate
+      li.video__comment(data-id='')
+        +chatIcon
+        span=''
     div.chatIconContainer(hidden)
       +chatIcon
     ul
       each comment in video.comments.reverse()
-        li.video__comment
+        li.video__comment(data-id=comment.id)
           +chatIcon
           span=comment.text
 

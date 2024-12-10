@@ -1,16 +1,31 @@
 # Wetube Reloaded
 
-/ -> Home
-/join -> Join
-/login -> Login
-/search -> Search
+## To-Dos
 
-/users/:id -> See User
-/users/logout -> Logout
-/users/edit -> Edit My Profile
-/users/delete -> Delete My Profile
+☑️ ❌ ✅
 
-/videos/:id -> See Video
-/videos/:id/edit -> Edit Video
-/videos/:id/delete -> Delete Video
-/videos/upload -> Upload Video
+☑️ styles
+
+    ☑️ form
+    ☑️ layout
+    ☑️ header
+    ☑️ footer
+    ☑️ home
+    ☑️ join
+    ☑️ login
+    ☑️ search
+    ☑️ upload-video
+    ☑️ my-profile
+    ☑️ edit-profile
+    ☑️ video
+    ☑️ edit-video
+    ☑️ messages
+    ☑️ video
+
+☑️ delete comment
+
+☑️ video 소형 플레이어
+
+☑️ video 영화관 모드
+
+☑️ video on video btn
