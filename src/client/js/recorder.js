@@ -28,7 +28,6 @@ const handleDownload = async () => {
 
   const ffmpeg = new FFmpeg();
   await ffmpeg.load();
-  ffmpeg.on("log", console.log);
   await ffmpeg.writeFile(files.input, await fetchFile(videoFile));
   await ffmpeg.exec(["-i", files.input, "-r", "60", files.output]);
   await ffmpeg.exec([
@@ -50,7 +49,9 @@ const handleDownload = async () => {
   downloadFile(mp4Url, "MyRecording.mp4");
   downloadFile(thumbUrl, "MyThumbnail.jpg");
 
-  ffmpeg.terminate();
+  await ffmpeg.deleteFile(files.input);
+  await ffmpeg.deleteFile(files.output);
+  await ffmpeg.deleteFile(files.thumbnail);
 
   URL.revokeObjectURL(videoFile);
   URL.revokeObjectURL(mp4Blob);
