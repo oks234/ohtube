@@ -46,11 +46,13 @@ block content
         a(href=`${video.id}/delete`) Delete Video &rarr;
 
   if loggedIn
-    div.video__comments
+    div.video__add-comments
       form.video__comment-form#commentForm
         textarea(cols="30" rows="10" placeholder="Write a comment...")
         button(type="submit") Add Comment
   div.video__comments
+    div.chatIconContainer(hidden)
+      +chatIcon
     ul
       each comment in video.comments.reverse()
         li.video__comment
