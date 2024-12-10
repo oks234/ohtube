@@ -5,8 +5,8 @@ import { S3Client } from "@aws-sdk/client-s3";
 const s3Client = new S3Client({
   region: "ap-northeast-2",
   credentials: {
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
@@ -14,6 +14,7 @@ const s3AvatarStorage = multerS3({
   s3: s3Client,
   bucket: "ohtube-2024",
   acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
   key: function (req, file, cb) {
     cb(null, `avatars/${req.session.user._id}/${Date.now().toString()}`);
   },
@@ -23,6 +24,7 @@ const s3VideoStorage = multerS3({
   s3: s3Client,
   bucket: "ohtube-2024",
   acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
   key: function (req, file, cb) {
     cb(null, `videos/${req.session.user._id}/${Date.now().toString()}`);
   },
