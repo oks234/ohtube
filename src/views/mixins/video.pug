@@ -1,10 +1,12 @@
 mixin video(video)
-  div
-    h4
-      a(href=`/videos/${video.id}`)=video.title
-    p=video.description
-    ul
-      each hashtag in video.hashtags
-        li=hashtag
-    small=video.createdAt
-    hr
+  p #{JSON.stringify(video)}
+  a(href=`/videos/${video.id}`)
+    div.video
+      //- video(src=video.fileUrl)
+      img(src=video.thumbUrl alt=video.title)
+      h4=video.title
+      p=video.description
+      ul
+        each hashtag in video.hashtags
+          li=hashtag
+      small=video.createdAt

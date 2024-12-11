@@ -1,0 +1,61 @@
+.video-grid {
+  &__empty {
+    padding: 96px 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  &__item {
+    display: grid;
+  }
+
+  &__thumb {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__container {
+    display: flex;
+    margin-top: .5rem;
+    gap: 12px;
+    align-items: start;
+  }
+
+  &__avatar {
+    flex: 0 0 36px;
+  }
+
+  &__content {
+    flex: 1 0 auto;
+
+    &__title {
+      font-weight: 500;
+      margin-bottom: .5em;
+    }
+
+    &__owner {
+      font-size: .9em;
+      color: $neutral-300;
+    }
+
+    &__small {
+      margin-top: .4rem;
+      font-size: .8em;
+      color: $neutral-300;
+    }
+
+    &__views {
+      margin-right: .2rem;
+    }
+
+    &__createdAt {
+      margin-left: .2rem;
+    }
+  }
+}

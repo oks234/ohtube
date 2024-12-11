@@ -1,0 +1,36 @@
+.profile {
+  &__title {
+    margin: 48px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__list,
+  &__actions {
+    margin: 24px 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  &__list {
+    li {
+      display: grid;
+      grid-template-columns: minmax(0, 80px) auto;
+      gap: 4px;
+
+      &.no-grid {
+        display: block;
+      }
+    }
+
+    &__name {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 48px;
+    }
+  }
+}

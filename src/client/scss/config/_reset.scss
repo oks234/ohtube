@@ -49,4 +49,20 @@ table {
 a {
   color: inherit;
   text-decoration: none;
+	
+	&:hover {
+		color: $anchor-hover;
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+
+svg {
+	width: 100%;
+	height: auto;
+	pointer-events: none;
 }

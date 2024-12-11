@@ -1,8 +1,25 @@
 extends ../base
-include ../mixins/video
+include ../mixins/avatar
+include ../mixins/link
+include ../mixins/videoGrid
 
 block content 
-  each video in user.videos
-    +video(video)
-  else
-    div No videos
+
+  h2.profile__title Profile
+  ul.profile__list
+    li
+      span.profile__list__name Avatar
+      +avatar(user, '')(imgOnly=true)
+    li
+      span.profile__list__name Name
+      span=user.name
+    li
+      span.profile__list__name Email
+      span=user.email
+    li.no-grid Uploaded #{user.videos.length || 0} Video#{user.videos.length > 1 ? 's' : ''}
+  if user.email === loggedInUser.email
+    div.profile__actions
+      +link('Edit Profile', "/users/edit")
+
+  h2.profile__title Uploaded Videos
+  +videoGrid(user.videos)

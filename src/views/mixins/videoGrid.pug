@@ -1,0 +1,50 @@
+include avatar
+
+mixin videoGrid(videos)
+  if videos.length
+      div.video-grid
+        ul
+          each video in videos
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+            +item(video)
+  else
+    div.video-grid__empty No videos
+
+mixin item(video)
+  li
+    //- p #{JSON.stringify(video)}
+    div.video-grid__item
+      a(href=`/videos/${video.id}`)
+        div.video-grid__thumb
+          img(src=video.thumbUrl alt=video.title)
+      div.video-grid__container
+        +avatar(video.owner, 'video-grid__avatar')
+        div.video-grid__content
+          a(href=`/videos/${video.id}`)
+            h4.video-grid__content__title=video.title
+          //- p.video-grid__content__desc=video.description
+          a.video-grid__content__owner(href=`/users/${video.owner._id}`)=video.owner.name
+          //- ul
+            each hashtag in video.hashtags
+              li=hashtag
+          p.video-grid__content__small
+            span.video-grid__content__views 조회수 #{video.meta.views}
+            span &bull;
+            span.video-grid__content__createdAt=new Date(video.createdAt).toLocaleDateString()

@@ -16,11 +16,10 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: $color;
+    color: $neutral-50;
     width: 24px;
 
-    span,
-    svg {
+    span {
       pointer-events: none;
     }
 
@@ -42,7 +41,7 @@
     }
 
     &:hover {
-      color: $color--hovered;
+      color: $neutral-200;
     }
 
     &.showing {
@@ -66,7 +65,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: $bg;
+    background-color: $neutral-900;
     border-radius: 24px;
 
     input {

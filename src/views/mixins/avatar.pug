@@ -1,0 +1,15 @@
+include icons
+
+mixin avatar(user, className,)
+  if attributes.imgOnly
+    div.avatar(class=className)
+      if user.avatarUrl
+        img(src=user.avatarUrl)
+      else
+        +userIcon
+  else 
+    a.avatar(class=className href=`/users/${user._id}`)
+      if user.avatarUrl
+        img(src=user.avatarUrl)
+      else
+        +userIcon

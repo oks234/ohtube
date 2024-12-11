@@ -1,0 +1,30 @@
+include ../mixins/avatar
+include ../mixins/icons
+
+header.header
+  div.header__col.header__col--left
+    a.header__logo(href="/")
+      span.header__logo__square
+        +playIcon
+      span.header__logo__text Ohtube
+  div.header__col.header__col--center
+    h1.pageTitle=pageTitle
+  div.header__col.header__col--right
+    nav.header__nav
+      ul  
+        li
+          a(href="/search") Search
+        if loggedIn
+          li
+            a(href="/videos/upload") Upload Video
+          li
+            a(href="/users/logout") Logout
+        else
+          li
+            a(href="/join") Join
+          li
+            a(href="/login") Login
+    if loggedIn
+      +avatar(loggedInUser, 'header__avatar')
+      //- a.header__avatar(href=`/users/${loggedInUser._id}`)
+        img(src=loggedInUser.avatarUrl)
