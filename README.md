@@ -2,28 +2,49 @@
 
 ## To-Dos
 
-☑️ ❌ ✅
+☑️ ✅
 
-☑️ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error
+### bugfix
 
-☑️ styles
+☑️ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error (aws assess key, secret key 문제로 추정)
 
-    ☑️ form
-    ☑️ layout
-    ☑️ search
-    ☑️ upload-video
-    ☑️ edit-profile
-    ☑️ edit-video
-    ☑️ messages
-    ☑️ watch
-    ✅ header
-    ✅ footer
-    ✅ home
-    ✅ my-profile
-    ✅ video-grid
-    ✅ join
-    ✅ login
-    ✅ change-password
+☑️ video player 종종 total time을 불러오지 않음
+
+### styles
+
+☑️ form
+
+☑️ layout
+
+☑️ search
+
+☑️ upload-video
+
+☑️ edit-profile
+
+☑️ edit-video
+
+☑️ messages
+
+☑️ watch
+
+✅ header
+
+✅ footer
+
+✅ home
+
+✅ my-profile
+
+✅ video-grid
+
+✅ join
+
+✅ login
+
+✅ change-password
+
+### features
 
 ☑️ delete comment
 
