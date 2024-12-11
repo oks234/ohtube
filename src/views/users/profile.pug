@@ -20,6 +20,7 @@ block content
   if user.email === loggedInUser.email
     div.profile__actions
       +link('Edit Profile', "/users/edit")
+      +link('Change Password', "/users/change-password")
 
   h2.profile__title Uploaded Videos
   +videoGrid(user.videos)

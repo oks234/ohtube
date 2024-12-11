@@ -1,0 +1,15 @@
+extends ../base
+include ../mixins/icons
+
+block content 
+  form(method="POST")
+    label.label(for="email") Email
+    input(placeholder="email" name="email" type="email" required)
+    label.label(for="password") Password
+    input(placeholder="password" name="password" type="password" required)
+    button.button(type="submit") Login 
+    a.button.login__github-btn(href="/users/github/start") GitHub Login
+      +githubIcon
+  div.login__actions
+    span Don't have an account? 
+    a(href="/join") Join now &rarr;

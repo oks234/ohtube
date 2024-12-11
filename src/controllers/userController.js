@@ -1,18 +1,19 @@
 import bcrypt from "bcrypt";
 import User from "../models/User";
 
-export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
+export const getJoin = (req, res) =>
+  res.render("users/join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
-  const { email, password, password2, name, location } = req.body;
-  if (password !== password2) {
-    return res.status(400).render("join", {
+  const { email, password, passwordConfirmation, name, location } = req.body;
+  if (password !== passwordConfirmation) {
+    return res.status(400).render("users/join", {
       pageTitle: "Join",
       errorMessage: "Password confirmation does not match.",
     });
   }
   const exists = await User.exists({ email });
   if (exists) {
-    return res.status(400).render("join", {
+    return res.status(400).render("users/join", {
       pageTitle: "Join",
       errorMessage: "The email is already exists.",
     });
@@ -21,14 +22,14 @@ export const postJoin = async (req, res) => {
     await User.create({ email, password, name, location });
     return res.redirect("/login");
   } catch (error) {
-    return res.status(400).render("join", {
+    return res.status(400).render("users/join", {
       pageTitle: "Join",
       errorMessage: error._message,
     });
   }
 };
 export const getEdit = (req, res) =>
-  res.render("edit-profile", { pageTitle: "Edit Profile" });
+  res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 export const postEdit = async (req, res) => {
   const {
     session: {
@@ -40,7 +41,7 @@ export const postEdit = async (req, res) => {
   const emailExists =
     email !== req.session.user.email && (await User.exists({ email }));
   if (emailExists) {
-    return res.render("edit-profile", {
+    return res.render("users/edit-profile", {
       pageTitle: "Edit Profile",
       errorMessage: `The email ("${email}") is already exists.`,
     });
@@ -60,20 +61,20 @@ export const postEdit = async (req, res) => {
 };
 export const remove = (req, res) => res.send("Remove user");
 export const getLogin = (req, res) =>
-  res.render("login", { pageTitle: "Login" });
+  res.render("users/login", { pageTitle: "Login" });
 export const postLogin = async (req, res) => {
   const { email, password } = req.body;
   const pageTitle = "Login";
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).render("login", {
+    return res.status(400).render("users/login", {
       pageTitle,
       errorMessage: "An account with this email does not exits.",
     });
   }
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return res.status(400).render("login", {
+    return res.status(400).render("users/login", {
       pageTitle,
       errorMessage: "Wrong password",
     });
@@ -168,9 +169,9 @@ export const postChangePassword = async (req, res) => {
     session: {
       user: { _id },
     },
-    body: { oldPassword, newPassword, newPasswordConfirmation },
+    body: { oldPassword, password, passwordConfirmation },
   } = req;
-  if (newPassword !== newPasswordConfirmation) {
+  if (password !== passwordConfirmation) {
     return res.status(400).render("users/change-password", {
       pageTitle,
       errorMessage: "Password confirmation does not match.",
@@ -184,7 +185,7 @@ export const postChangePassword = async (req, res) => {
       errorMessage: "The Current password is incorrect",
     });
   }
-  user.password = newPassword;
+  user.password = password;
   await user.save();
   return res.redirect("/users/logout");
 };

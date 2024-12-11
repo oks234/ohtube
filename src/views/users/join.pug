@@ -1,0 +1,22 @@
+extends ../base
+include ../mixins/link
+
+block content 
+  form(method="POST")
+    label.label(for="email") Email
+    input(placeholder="email" id="email" name="email" type="email" required)
+    label.label(for="name") Name
+    input(placeholder="name" id="name" name="name" type="text" required)
+    label.label(for="password") Password
+    input(placeholder="password" id="password" name="password" type="password" required)
+    label.label(for="passwordConfirmation") Confirm
+      br
+      | Password
+    input(placeholder="confirm password" id="passwordConfirmation" name="passwordConfirmation" type="password" required)
+    label.label(for="location") Location
+    input(placeholder="location" id="location" name="location" type="text")
+    button.button(type="submit") Join 
+  div.join__actions
+    p
+      span Already have an account? 
+      +link('Login Now','/login')

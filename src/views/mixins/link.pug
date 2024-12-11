@@ -1,6 +1,4 @@
 include icons
 
 mixin link(text, href)
-  a.link(href=href)
-    span=text
-    +arrowRightSmallIcon
+  a.link(href=href) #{text} &rarr;

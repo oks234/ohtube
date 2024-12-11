@@ -13,7 +13,7 @@ html(lang="ko")
     if messages.success
       +messages('success', messages.success)
     include partials/header
-    main
+    main(class=screenName || (pageTitle ? pageTitle.toLowerCase().replace(' ', '-') : ''))
       block content
     include partials/footer
 

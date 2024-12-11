@@ -10,19 +10,20 @@
 
     ☑️ form
     ☑️ layout
-    ☑️ header
-    ☑️ footer
-    ☑️ home
-    ☑️ join
-    ☑️ login
     ☑️ search
     ☑️ upload-video
-    ☑️ my-profile
     ☑️ edit-profile
-    ☑️ video
     ☑️ edit-video
     ☑️ messages
-    ☑️ video
+    ☑️ watch
+    ✅ header
+    ✅ footer
+    ✅ home
+    ✅ my-profile
+    ✅ video-grid
+    ✅ join
+    ✅ login
+    ✅ change-password
 
 ☑️ delete comment
 
@@ -31,3 +32,7 @@
 ☑️ video 영화관 모드
 
 ☑️ video on video btn
+
+☑️ messages 정리
+
+✅ views 폴더 정리
