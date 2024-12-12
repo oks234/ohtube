@@ -52,7 +52,9 @@
 
 ### features
 
-☑️ delete comment
+☑️ delete comment (relations 포함)
+
+☑️ loading indicator
 
 ☑️ video 소형 플레이어
 
@@ -69,5 +71,9 @@
 ☑️ search 다른 조건 추가
 
 ☑️ nav search form으로 교체
+
+☑️ video 삭제 시 relations도 삭제
+
+☑️ aws s3 bucket data 삭제
 
 ✅ views 폴더 정리
