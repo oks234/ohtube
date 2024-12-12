@@ -1,6 +1,25 @@
-.video__comments {}
+.watch-video {
+  &__content {
+    margin: 1rem 0;
+    display: grid;
+    gap: .5rem;
+  }
 
-.video__comment {
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.add-comment {
+  &__form {
+    max-width: initial;
+    width: auto;
+    grid-template-columns: auto 8rem;
+  }
+}
+
+.comments {
   display: flex;
   align-items: center;
 

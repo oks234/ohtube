@@ -2,7 +2,7 @@ const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
 
 const addComment = (text, id) => {
-  const videoComments = document.querySelector(".video__comments ul");
+  const videoComments = document.querySelector("#videoComments ul");
   const chatIcon = document.querySelector(".chatIconContainer svg");
   const newComment = document.createElement("li");
   const span = document.createElement("span");

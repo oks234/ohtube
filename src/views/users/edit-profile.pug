@@ -1,16 +1,23 @@
 extends ../base
+include ../mixins/avatar
+include ../mixins/link
 
 block content
-  if errorMessage
-    small=errorMessage
-  img(src=loggedInUser.avatarUrl width=100 height=100)
   form(method="POST" enctype="multipart/form-data")
-    label(for="avatar") Avater
-    input(type="file" id="avatar" name="avatar" accept="image/*")
-    input(placeholder="email" name="email" type="email" required value=loggedInUser.email)
-    input(placeholder="name" name="name" type="text" required value=loggedInUser.name)
-    input(placeholder="location" name="location" type="text" value=loggedInUser.location)
+    fieldset
+      +avatar(loggedInUser)(imgOnly)
+      label(for="avatar") Avater
+      input(type="file" id="avatar" name="avatar" accept="image/*")
+    fieldset
+      label(for="email") email
+      input(placeholder="email" id="email" name="email" type="email" required value=loggedInUser.email)
+    fieldset
+      label(for="name") name
+      input(placeholder="name" id="name" name="name" type="text" required value=loggedInUser.name)
+    fieldset
+      label(for="location") location
+      input(placeholder="location" id="location" name="location" type="text" value=loggedInUser.location)
     button(type="submit") Update Profile
-    if !loggedInUser.socialOnly
-      hr
-      a(href="change-password") Change Password
+  if !loggedInUser.socialOnly
+    div.actions
+      +link('Change Password', 'change-password')

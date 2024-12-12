@@ -1,10 +1,12 @@
 extends ../base
-include ../mixins/video
+include ../mixins/icons
+include ../mixins/videoGrid
 
 block content
-  form
-    input(type="text" placeholder="Search by title" name="keyword")
-    button(type="submit") Search now
+  form.search__form
+    input(type="text" placeholder="Search by title" name="keyword" value=keyword)
+    button(type="submit") Search
+      +searchIcon
 
-  each video in videos
-    +video(video)
+  h2 Results
+  +videoGrid(videos)

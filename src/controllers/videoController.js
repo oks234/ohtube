@@ -15,7 +15,7 @@ export const watch = async (req, res) => {
     return res.render("404", { pageTitle: "Video not found" });
   }
   res.render("videos/watch", {
-    pageTitle: `Watch ${video.title}`,
+    pageTitle: 'Watch Video',
     video,
   });
 };
@@ -31,7 +31,7 @@ export const getEdit = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
-  res.render("videos/edit", { pageTitle: `Edit ${video.title}`, video });
+  res.render("videos/edit", { pageTitle: 'Edit Video', video });
 };
 export const postEdit = async (req, res) => {
   const { id } = req.params;
@@ -111,7 +111,7 @@ export const search = async (req, res) => {
       },
     }).populate("owner");
   }
-  return res.render("videos/search", { pageTItle: "Search", videos });
+  return res.render("videos/search", { pageTitle: "Search", videos, keyword });
 };
 export const registerView = async (req, res) => {
   const { id } = req.params;

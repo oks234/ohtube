@@ -8,21 +8,13 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-form {
-  display: grid;
-  width: 280px;
-  gap: 16px 8px;
-  max-width: 80%;
-  grid-template-columns: max-content auto;
-  margin: 48px auto;
-  align-items: center;
-
-  button[type=submit] {
-    grid-column: 1 / 3;
-  }
+h2 {
+  margin: 4rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.label {
+@mixin form-label {
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 500;
@@ -34,12 +26,18 @@ form {
 
   &:hover {
     background-color: $neutral-200;
-    color: $neutral-900;
+  }
+
+  &:disabled {
+    background-color: $neutral-200;
+    color: $neutral-600;
   }
 }
 
-.button {
-	border-radius: 4px;
+@mixin button {
+  @include button-color;
+
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,14 +45,53 @@ form {
   cursor: pointer;
   gap: 4px;
 
-  @include button-color;
-
   svg {
     width: 20px;
   }
 }
+
+form {
+  display: grid;
+  width: 20rem;
+  gap: 1rem .5rem;
+  max-width: 80%;
+  margin: 4rem auto;
+  align-items: center;
+
+  fieldset {
+    display: grid;
+    gap: .5rem;
+  }
+
+  label {
+    @include form-label;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  button {
+    @include button;
+  }
+}
+
+.label {
+  @include form-label;
+}
+
+.button {
+  @include button;
+}
+
 a.button {
-  @include button-color;
+  @include button;
+}
+
+.actions {
+  font-size: .85rem;
+  text-align: center;
 }
 
 .pageTitle {
@@ -62,6 +99,25 @@ a.button {
   font-size: 1.2rem;
   text-transform: uppercase;
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hashtags {
+  display: flex;
+  gap: .5rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    height: 1.5rem;
+    padding: 0 .5em;
+    font-size: .8rem;
+    background-color: $neutral-500;
+  }
 }
 
 .messages {
@@ -127,10 +183,13 @@ a.button {
 @import "./components/header";
 @import "./components/footer";
 @import "./components/link";
+@import "./components/recording";
 @import "./components/videoGrid";
 @import "./components/videoPlayer";
 
 @import "./screens/profile";
 @import "./screens/watch";
 @import "./screens/join";
+@import "./screens/search";
 @import "./screens/login";
+@import "./screens/editProfile";

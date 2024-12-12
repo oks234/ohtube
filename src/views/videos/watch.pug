@@ -1,56 +1,35 @@
 extends ../base
 include ../mixins/icons
+include ../mixins/link
+include ../mixins/videoPlayer
 
 block content
-  div#videoContainer(data-id=video._id)
-    .videoWrapper
-      video(src=video.fileUrl)
-      button#playOnVideo.playBtnOnVideo
-        span.playIcon
-          +playIcon
-        span.pauseIcon
-          +pauseIcon
-      div#videoControls.videoControls
-        button#play
-          span.playIcon
-            +playIcon
-          span.pauseIcon
-            +pauseIcon
-        button#mute
-          span.muteIcon
-            +muteIcon
-          span.speakerIcon
-            +speakerIcon
-        input#volume.volume(type="range" step="0.1" min="0" max="1" value="0.5")
-        div
-          span#currentTime 00:00
-          span  / 
-          span#totalTime 00:00
-        input#timeline.timeline(type="range" step="1" min="0" value="0")
-        div
-          button#fullScreen
-            span.enterFullScreenIcon
-              +enterFullScreenIcon
-            span.exitFullScreenIcon
-              +exitFullScreenIcon
-  div
-    p=video.description
-    small=video.createdAt
-  div
-    small Uploaded By 
+  +videoPlayer(video)
+  h2 Video Info
+  div.watch-video__content
+    h3.watch-video__title=video.title
+    p.watch-video__description=video.description
+    ul.hashtags
+      each hashtag in video.hashtags
+        li=hashtag
+    p.watch-video__createdAt=new Date(video.createdAt).toLocaleString()
+    p.watch-video__owner Uploaded By 
       a(href=`/users/${video.owner._id}`)=video.owner.name
   if String(video.owner._id) === String(loggedInUser._id)
-    div
-      a(href=`${video.id}/edit`) Edit Video &rarr;
-    div
-      a(href=`${video.id}/delete`) Delete Video &rarr;
+    h2 Manage Video
+    div.actions
+      +link('Edit Video', `${video.id}/edit`)
+      br
+      br
+      +link('Delete Video', `${video.id}/delete`)
 
+  h2 Comments
   if loggedIn
-    div.video__add-comments
-      form.video__comment-form#commentForm
-        textarea(cols="30" rows="10" placeholder="Write a comment...")
+    div.add-comment
+      form.add-comment__form#commentForm
+        textarea(rows="1" placeholder="Write a comment...")
         button(type="submit") Add Comment
-  div.video__comments
+  div#videoComments.comments
     template#videoCommentTemplate
       li.video__comment(data-id='')
         +chatIcon

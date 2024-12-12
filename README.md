@@ -10,23 +10,17 @@
 
 ☑️ video player 종종 total time을 불러오지 않음
 
-### styles
+☑️ edit-profile 아바타 바꾸면 img도 변경
 
-☑️ form
+### styles
 
 ☑️ layout
 
-☑️ search
-
-☑️ upload-video
-
-☑️ edit-profile
-
-☑️ edit-video
-
 ☑️ messages
 
-☑️ watch
+☑️ 모바일
+
+☑️ 태블릿
 
 ✅ header
 
@@ -44,6 +38,18 @@
 
 ✅ change-password
 
+✅ upload-video
+
+✅ edit-profile
+
+✅ edit-video
+
+✅ search
+
+✅ form
+
+✅ watch
+
 ### features
 
 ☑️ delete comment
@@ -55,5 +61,13 @@
 ☑️ video on video btn
 
 ☑️ messages 정리
+
+☑️ cofirm delete video
+
+☑️ recording 개선
+
+☑️ search 다른 조건 추가
+
+☑️ nav search form으로 교체
 
 ✅ views 폴더 정리

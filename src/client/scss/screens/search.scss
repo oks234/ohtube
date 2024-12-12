@@ -1,0 +1,13 @@
+.search {
+  &__form {
+    // max-width: initial;
+    // width: auto;
+    grid-template-columns: auto 6rem;
+
+    button {
+      svg {
+        width: 1rem;
+      }
+    }
+  }
+}
