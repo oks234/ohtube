@@ -10,18 +10,20 @@ const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const playOnVideoBtn = document.getElementById("playOnVideo");
 
+let contorlsLeaveTimeout;
+let controlsMovementTimeout = null;
+let volumeValue = 0.5;
+
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substr(14, 5);
 const hideControls = () => {
   videoControls.classList.remove("showing");
   playOnVideoBtn.classList.remove("showing");
 };
-
-let contorlsLeaveTimeout;
-let controlsMovementTimeout = null;
-let volumeValue = 0.5;
-video.volume = volumeValue;
-currentTime.innerText = formatTime(0);
+const updateTotalTime = (videoDuration) => {
+  totalTime.innerText = formatTime(Math.floor(videoDuration));
+  timelineRange.max = Math.floor(videoDuration);
+};
 
 const handlePlayBtnClick = () => {
   if (video.paused) {
@@ -42,10 +44,6 @@ const handleVolueRangeInput = (e) => {
   volumeValue = value;
   video.volute = value;
 };
-const handleVideoLoadedMetadata = () => {
-  totalTime.innerText = formatTime(Math.floor(video.duration));
-  timelineRange.max = Math.floor(Math.floor(video.duration));
-};
 const handleVideoTimeupdate = () => {
   currentTime.innerText = formatTime(Math.floor(video.currentTime));
   timelineRange.value = Math.floor(video.currentTime);
@@ -62,6 +60,20 @@ const handleFullScreenBtnClick = () => {
   }
   videoContainer.requestFullscreen();
 };
+const handleVideoLoadedMetadata = () => {
+  totalTime.innerText = formatTime(Math.floor(video.duration));
+  timelineRange.max = Math.floor(video.duration);
+};
+
+video.volume = volumeValue;
+currentTime.innerText = formatTime(0);
+
+if (video.duration) {
+  updateTotalTime(video.duration);
+} else {
+  video.addEventListener("loadedmetadata", handleVideoLoadedMetadata);
+}
+
 const handleVideoContainerMouseMove = () => {
   if (contorlsLeaveTimeout) {
     clearTimeout(contorlsLeaveTimeout);
@@ -119,7 +131,6 @@ volumeRange.addEventListener("input", handleVolueRangeInput);
 timelineRange.addEventListener("input", handleTimelineRangeInput);
 fullScreenBtn.addEventListener("click", handleFullScreenBtnClick);
 video.addEventListener("ended", handleVideoEnded);
-video.addEventListener("loadedmetadata", handleVideoLoadedMetadata);
 video.addEventListener("timeupdate", handleVideoTimeupdate);
 video.addEventListener("pause", handleVideoPause);
 video.addEventListener("play", handVideoPlay);

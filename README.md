@@ -8,9 +8,9 @@
 
 ☑️ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error (aws assess key, secret key 문제로 추정)
 
-☑️ video player 종종 total time을 불러오지 않음
-
 ☑️ edit-profile 아바타 바꾸면 img도 변경
+
+✅ video player 종종 total time을 불러오지 않음
 
 ### styles
 
