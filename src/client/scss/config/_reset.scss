@@ -165,14 +165,31 @@ textarea {
 	padding: 0;
 }
 
-input[type="input"],
-textarea {
+@mixin textInput {
 	border-radius: 4px;
 	padding: 7px 12px;
 	line-height: 16px;
 	border: 1px solid $neutral-50;
 }
 
+input {
+	&[type="date"],
+	&[type="datetime-local"],
+	&[type="email"],
+	&[type="file"],
+	&[type="number"],
+	&[type="password"],
+	&[type="search"],
+	&[type="tel"],
+	&[type="text"],
+	&[type="time"],
+	&[type="url"],
+	&[type="week"] {
+		@include textInput;
+	}
+}
+
 textarea {
+	@include textInput;
 	resize: none;
 }
