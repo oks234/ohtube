@@ -52,6 +52,8 @@
 
 ### features
 
+☑️ messages 정리
+
 ☑️ delete comment (relations 포함)
 
 ☑️ loading indicator
@@ -61,8 +63,6 @@
 ☑️ video 영화관 모드
 
 ☑️ video on video btn
-
-☑️ messages 정리
 
 ☑️ cofirm delete video
 
