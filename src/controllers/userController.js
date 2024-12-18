@@ -1,31 +1,30 @@
 import bcrypt from "bcrypt";
 import User from "../models/User";
 
+const PASSWORD_CONFIRMATION_ERR_MSG = "Password confirmation does not match.";
+
 export const getJoin = (req, res) =>
   res.render("users/join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
+  const path = "users/join";
+  const pageTitle = "Join";
   const { email, password, passwordConfirmation, name, location } = req.body;
-  if (password !== passwordConfirmation) {
-    return res.status(400).render("users/join", {
-      pageTitle: "Join",
-      errorMessage: "Password confirmation does not match.",
-    });
-  }
   const exists = await User.exists({ email });
   if (exists) {
-    return res.status(400).render("users/join", {
-      pageTitle: "Join",
-      errorMessage: "The email is already exists.",
-    });
+    req.flash("error", "The email is already exists.");
+    return res.status(400).render(path, { pageTitle });
+  }
+  if (password !== passwordConfirmation) {
+    req.flash("error", PASSWORD_CONFIRMATION_ERR_MSG);
+    return res.status(400).render(path, { pageTitle });
   }
   try {
     await User.create({ email, password, name, location });
+    req.flash("success", "User created.");
     return res.redirect("/login");
   } catch (error) {
-    return res.status(400).render("users/join", {
-      pageTitle: "Join",
-      errorMessage: error._message,
-    });
+    req.flash("error", error._message);
+    return res.status(400).render(path, { pageTitle });
   }
 };
 export const getEdit = (req, res) =>
@@ -38,14 +37,6 @@ export const postEdit = async (req, res) => {
     body: { email, name, location },
     file,
   } = req;
-  const emailExists =
-    email !== req.session.user.email && (await User.exists({ email }));
-  if (emailExists) {
-    return res.render("users/edit-profile", {
-      pageTitle: "Edit Profile",
-      errorMessage: `The email ("${email}") is already exists.`,
-    });
-  }
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
@@ -130,7 +121,7 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
-      // set notification
+      req.flash("error", "There's no valid email address.");
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -148,7 +139,7 @@ export const finishGithubLogin = async (req, res) => {
     req.session.user = user;
     res.redirect("/");
   } else {
-    // set notification
+    req.flash("error", "Access token is wrong.");
     return res.redirect("/login");
   }
 };
@@ -158,12 +149,13 @@ export const logout = (req, res) => {
 };
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
-    req.flash("error", "Can't change password.");
+    req.flash("error", "Social login user can't change password.");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
 };
 export const postChangePassword = async (req, res) => {
+  const path = "users/change-password";
   const pageTitle = "Change Password";
   const {
     session: {
@@ -172,18 +164,14 @@ export const postChangePassword = async (req, res) => {
     body: { oldPassword, password, passwordConfirmation },
   } = req;
   if (password !== passwordConfirmation) {
-    return res.status(400).render("users/change-password", {
-      pageTitle,
-      errorMessage: "Password confirmation does not match.",
-    });
+    req.flash("error", PASSWORD_CONFIRMATION_ERR_MSG);
+    return res.status(400).render(path, { pageTitle });
   }
   const user = await User.findById(_id);
   const match = await bcrypt.compare(oldPassword, user.password);
   if (!match) {
-    return res.status(400).render("users/change-password", {
-      pageTitle,
-      errorMessage: "The Current password is incorrect",
-    });
+    req.flash("error", "The Current password is incorrect.");
+    return res.status(400).render(path, { pageTitle });
   }
   user.password = password;
   await user.save();

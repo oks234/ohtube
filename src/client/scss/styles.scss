@@ -155,8 +155,8 @@ a.button {
   justify-content: center;
   pointer-events: none;
   transform: translateY(-100%);
-  animation: $duration ease-out moveIn,
-  0.3s ease-in $duration moveOut;
+  z-index: $messagesZIndex;
+  transition: transform 0.3s ease-in-out;
 
   >div {
     margin: 1em auto;

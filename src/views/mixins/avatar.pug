@@ -6,6 +6,7 @@ mixin avatar(user, className,)
       if user.avatarUrl
         img(src=user.avatarUrl)
       else
+        img(src='')
         +userIcon
   else 
     a.avatar(class=className href=`/users/${user._id}`)

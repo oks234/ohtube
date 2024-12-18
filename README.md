@@ -6,7 +6,7 @@
 
 ### bugfix
 
-☑️ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error (aws assess key, secret key 문제로 추정)
+✅ local에선 괜찮은데, deploy 후, 파일 업로드 시 Internal Server Error (aws assess key, secret key 문제로 추정)
 
 ✅ edit-profile 아바타 바꾸면 img도 변경
 
@@ -15,8 +15,6 @@
 ### styles
 
 ☑️ layout
-
-☑️ messages
 
 ☑️ 모바일
 
@@ -50,9 +48,9 @@
 
 ✅ watch
 
-### features
+✅ messages
 
-☑️ messages 정리
+### features
 
 ☑️ delete comment (relations 포함)
 
@@ -76,4 +74,8 @@
 
 ☑️ aws s3 bucket data 삭제
 
+☑️ 다른 login 방식 추가 (Google, Naver, Kakao, Apple 등)
+
 ✅ views 폴더 정리
+
+✅ messages 정리

@@ -15,7 +15,7 @@ export const watch = async (req, res) => {
     return res.render("404", { pageTitle: "Video not found" });
   }
   res.render("videos/watch", {
-    pageTitle: 'Watch Video',
+    pageTitle: "Watch Video",
     video,
   });
 };
@@ -31,7 +31,7 @@ export const getEdit = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
-  res.render("videos/edit", { pageTitle: 'Edit Video', video });
+  res.render("videos/edit", { pageTitle: "Edit Video", video });
 };
 export const postEdit = async (req, res) => {
   const { id } = req.params;
@@ -39,7 +39,7 @@ export const postEdit = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById(id);
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
@@ -78,11 +78,8 @@ export const postUpload = async (req, res) => {
     user.save();
     return res.redirect("/");
   } catch (error) {
-    console.log(error);
-    return res.status(400).render("videos/upload", {
-      pageTitle: "Upload Video",
-      errorMessage: error._message,
-    });
+    res.flash("error", error._message);
+    return res.status(400).redirect("videos/upload");
   }
 };
 export const deleteVideo = async (req, res) => {
@@ -95,9 +92,11 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "You're not video owner.");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
+  req.flash("success", "Video Deleted.");
   return res.redirect("/");
 };
 
@@ -141,5 +140,6 @@ export const createComment = async (req, res) => {
   const user = await User.findById(userId);
   user.comments.push(comment._id);
   await user.save();
+  req.flash("success", "Comment Created.");
   return res.status(201).json({ newCommentId: comment._id });
 };
