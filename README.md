@@ -52,8 +52,6 @@
 
 ### features
 
-☑️ delete comment (relations 포함)
-
 ☑️ loading indicator
 
 ☑️ video 소형 플레이어
@@ -79,3 +77,5 @@
 ✅ views 폴더 정리
 
 ✅ messages 정리
+
+✅ delete comment (relations 포함)

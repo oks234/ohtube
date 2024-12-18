@@ -23,8 +23,31 @@
   display: flex;
   align-items: center;
 
-  svg {
-    width: 24px;
-    margin-right: .25em;
+  ul {
+    display: grid;
+    gap: .5rem;
   }
+}
+
+.video__comment {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+
+  svg {
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  p {
+    white-space: pre-line;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.no-comments {
+  display: none;
 }

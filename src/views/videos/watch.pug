@@ -3,13 +3,20 @@ include ../mixins/icons
 include ../mixins/link
 include ../mixins/videoPlayer
 
+mixin comment(id, text)
+  li.video__comment(data-id=id || '')
+    +chatIcon
+    p=text || ''
+    button.video__comment__delete-btn
+      +trashIcon
+
 block content
   +videoPlayer(video)
   h2 Video Info
   div.watch-video__content
     h3.watch-video__title=video.title
     p.watch-video__description=video.description
-    ul.hashtags
+    ul.hashtags 
       each hashtag in video.hashtags
         li=hashtag
     p.watch-video__createdAt=new Date(video.createdAt).toLocaleString()
@@ -31,16 +38,11 @@ block content
         button(type="submit") Add Comment
   div#videoComments.comments
     template#videoCommentTemplate
-      li.video__comment(data-id='')
-        +chatIcon
-        span=''
-    div.chatIconContainer(hidden)
-      +chatIcon
+      +comment
     ul
       each comment in video.comments.reverse()
-        li.video__comment(data-id=comment.id)
-          +chatIcon
-          span=comment.text
+        +comment(comment.id, comment.text)
+    p.no-comments(style=video.comments.length ? undefined : "display: block;") No Comments
 
 
 block scripts

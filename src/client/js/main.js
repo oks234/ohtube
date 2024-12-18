@@ -1,9 +1,32 @@
 import "../scss/styles.scss";
 
-messages();
+showAndHideMessages();
 editProfile();
+initAddMessage();
 
-function messages() {
+function initAddMessage() {
+  if (window.addMessage) return;
+
+  window.addMessage = (type, msg) => {
+    let messages = document.querySelector(".messages");
+
+    if (!messages) {
+      messages = document.createElement("div");
+      messages.classList.add("messages");
+      document.body.append(messages);
+    }
+
+    messages.style.setProperty("transform", "translateY(-100%)");
+    messages.innerHTML = "";
+    const message = document.createElement("div");
+    message.className = type;
+    message.innerHTML = msg;
+    messages.append(message);
+    showAndHideMessages();
+  };
+}
+
+function showAndHideMessages() {
   const messages = document.querySelector(".messages");
 
   if (!messages) return;

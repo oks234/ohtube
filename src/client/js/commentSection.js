@@ -1,17 +1,33 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const videoComments = document.querySelector("#videoComments");
+const noComments = videoComments.querySelector(".no-comments");
+
+const deleteComment = async (e) => {
+  const { id } = e.currentTarget.parentNode.dataset;
+  const videoId = videoContainer.dataset.id;
+  const response = await fetch(`/api/videos/${videoId}/comment?id=${id}`, {
+    method: "DELETE",
+  });
+  if (response.status === 204) {
+    const comment = videoComments.querySelector(`[data-id="${id}"]`);
+    comment.remove();
+    window.addMessage("success", "Comment deleted.");
+  }
+};
 
 const addComment = (text, id) => {
-  const videoComments = document.querySelector("#videoComments ul");
-  const chatIcon = document.querySelector(".chatIconContainer svg");
-  const newComment = document.createElement("li");
-  const span = document.createElement("span");
-  span.innerText = text;
-  newComment.className = "video__comment";
-  newComment.dataset.id = id;
-  newComment.appendChild(chatIcon.cloneNode(true));
-  newComment.appendChild(span);
-  videoComments.prepend(newComment);
+  const template = document.querySelector("#videoCommentTemplate");
+  const cloned = template.content.cloneNode(true);
+  const list = videoComments.querySelector("ul");
+  const li = cloned.querySelector("li");
+  const p = cloned.querySelector("p");
+  const button = cloned.querySelector("button");
+  p.innerText = text;
+  li.dataset.id = id;
+  list.prepend(cloned);
+  button.addEventListener("click", deleteComment);
+  noComments.style.setProperty("display", "none");
 };
 
 const handleSubmit = async (e) => {
@@ -31,9 +47,15 @@ const handleSubmit = async (e) => {
   if (response.status === 201) {
     const { newCommentId } = await response.json();
     addComment(text, newCommentId);
+    window.addMessage("success", "Comment Created.");
   }
 };
 
 if (form) {
   form.addEventListener("submit", handleSubmit);
+  Array.from(document.querySelectorAll(".video__comment__delete-btn")).forEach(
+    (btn) => {
+      btn.addEventListener("click", deleteComment);
+    }
+  );
 }
