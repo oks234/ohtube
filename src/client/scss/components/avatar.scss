@@ -4,5 +4,10 @@
 
   img {
     pointer-events: none;
+    aspect-ratio: 1;
+  }
+
+  &:hover {
+    color: $neutral-50;
   }
 }

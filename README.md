@@ -12,7 +12,11 @@
 
 ✅ video player 종종 total time을 불러오지 않음
 
+✅ edit-profile avatar 변경 시 에러
+
 ### styles
+
+☑️ video-grid 썸네일 크기 맞추기
 
 ☑️ layout
 

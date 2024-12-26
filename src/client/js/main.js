@@ -48,25 +48,32 @@ function showAndHideMessages() {
 function editProfile() {
   const main = document.querySelector("main.edit-profile");
 
+  // 1.
+
   if (!main) return;
 
   const input = document.getElementById("avatar");
   const img = main.querySelector(".avatar > img");
-  const defaultSvg = main.querySelector(".avatar > svg");
+  const svg = main.querySelector(".avatar > svg");
   const originalImgSrc = img.src;
 
   const handeInput = () => {
     const fileList = input.files;
     if (fileList.length === 0) {
-      img.src = originalImgSrc;
-      if (defaultSvg) {
-        defaultSvg.style.removeProperty("display");
+      if (svg) {
+        img.hidden = true;
+        svg.style.removeProperty("display");
+        return;
       }
+      img.src = originalImgSrc;
       return;
+    }
+    if (svg) {
+      img.hidden = false;
+      svg.style.setProperty("display", "none");
     }
     const [file] = fileList;
     img.src = URL.createObjectURL(file);
-    defaultSvg.style.setProperty("display", "none");
   };
 
   input.addEventListener("input", handeInput);

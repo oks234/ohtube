@@ -1,16 +1,19 @@
 include icons
 
-mixin avatar(user, className,)
+mixin avatar(user, className)
+  - const alt = `${user.name}'s avatar image`;
   if attributes.imgOnly
     div.avatar(class=className)
       if user.avatarUrl
-        img(src=user.avatarUrl)
+        img(src=user.avatarUrl alt=alt)
       else
-        img(src='')
+        img(src="" alt=alt hidden)
         +userIcon
   else 
     a.avatar(class=className href=`/users/${user._id}`)
       if user.avatarUrl
-        img(src=user.avatarUrl)
+        img(src=user.avatarUrl alt=alt)
       else
         +userIcon
+  template(id="default-avatar-icon")
+    +userIcon
