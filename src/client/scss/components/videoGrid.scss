@@ -16,6 +16,9 @@
   }
 
   &__thumb {
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 16 / 9;
     border-radius: 8px;
     overflow: hidden;
   }

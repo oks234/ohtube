@@ -16,7 +16,7 @@
 
 ### styles
 
-☑️ video-grid 썸네일 크기 맞추기
+✅ video-grid 썸네일 크기 맞추기
 
 ✅ layout
 
