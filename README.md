@@ -18,7 +18,7 @@
 
 ☑️ video-grid 썸네일 크기 맞추기
 
-☑️ layout
+✅ layout
 
 ☑️ 모바일
 

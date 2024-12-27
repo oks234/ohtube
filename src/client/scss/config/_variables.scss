@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $neutral-50: #fafafa;
 $neutral-200: #e7e5e4;
 $neutral-300: #d4d4d4;
@@ -17,3 +19,13 @@ $anchor-hover: $teal-300;
 
 $headerZIndex: 100;
 $messagesZIndex: 101;
+
+$max-width: ("sm": 640px, "md": 768px, "lg": 1024px, "xl": 1280px, "2xl": 1536px);
+
+@mixin mediaQuery($size) {
+  @media (max-width: map.get($max-width, $size)) {
+    & {
+      @content;
+    }
+  }
+}

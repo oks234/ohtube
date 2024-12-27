@@ -1,12 +1,17 @@
 .header {
   position: sticky;
-  gap: 1rem;
-  align-items: center;
   top: 0;
   padding: 1rem 0;
   background-color: $neutral-900;
-  display: flex;
   z-index: $headerZIndex;
+
+  &__inner {
+    gap: 1rem;
+    align-items: center;
+    display: flex;
+
+    @include container;
+  }
 
   &__col {
     &--left {
