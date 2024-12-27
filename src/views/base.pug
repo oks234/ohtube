@@ -14,6 +14,7 @@ html(lang="ko")
     if messages.success
       +messages('success', messages.success)
     include partials/header
+    h1.pageTitle=pageTitle
     main(class=screenName || (pageTitle ? pageTitle.toLowerCase().replace(' ', '-') : ''))
       block content
     include partials/footer

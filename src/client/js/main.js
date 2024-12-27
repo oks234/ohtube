@@ -3,6 +3,7 @@ import "../scss/styles.scss";
 showAndHideMessages();
 editProfile();
 initAddMessage();
+initHeader();
 
 function initAddMessage() {
   if (window.addMessage) return;
@@ -77,4 +78,22 @@ function editProfile() {
   };
 
   input.addEventListener("input", handeInput);
+}
+
+function initHeader() {
+  const OPEN_CLASS = "header--open";
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const closeMobileMenuBtn = document.getElementById("close-mobile-menu-btn");
+  const toggleMenu = (force) =>
+    typeof force === "boolean"
+      ? document.body.classList.toggle(OPEN_CLASS, force)
+      : document.body.classList.toggle(OPEN_CLASS);
+  mobileMenuBtn.addEventListener("click", toggleMenu);
+  closeMobileMenuBtn.addEventListener("click", toggleMenu);
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      toggleMenu(false);
+    }
+    console.log(window.innerWidth);
+  });
 }

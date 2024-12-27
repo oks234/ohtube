@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .header {
   position: sticky;
   top: 0;
@@ -10,6 +12,10 @@
     align-items: center;
     display: flex;
 
+    @include mediaQuery("sm") {
+      justify-content: space-between;
+    }
+
     @include container;
   }
 
@@ -20,10 +26,40 @@
 
     &--right {
       flex: 1 0 auto;
+
+      @include mediaQuery("sm") {
+        display: none;
+
+        @at-root .header--open & {
+          position: absolute;
+          display: block;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100vh;
+          background: change-color($color: $neutral-900, $alpha: 0.15);
+        }
+      }
+    }
+  }
+
+  &__menu {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 16px;
+
+    @include mediaQuery("sm") {
+      position: absolute;
+      top: 0;
+      right: 0;
+      // padding: 1rem 4rem;
+      padding: 1rem 2rem;
+      background: $neutral-900;
       display: flex;
-      justify-content: end;
-      align-items: center;
-      gap: 16px;
+      flex-direction: column;
+      align-items: flex-end;
     }
   }
 
@@ -34,7 +70,9 @@
     gap: .5em;
 
     &__square {
+      font-size: 1rem;
       width: 2.5em;
+      height: 1.5rem;
       border-radius: .5em;
       background-color: $neutral-50;
       color: $neutral-900;
@@ -45,8 +83,8 @@
     }
 
     svg {
-      width: 1.5em;
-      transform: translateX(.1em) translateY(.1em);
+      width: 1.25em;
+      transform: translateX(.1em) translateY(.15em);
     }
 
     &__text {
@@ -60,11 +98,27 @@
     ul {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: .75rem;
+      font-size: .9rem;
+
+      @include mediaQuery("sm") {
+        flex-direction: column;
+      }
     }
   }
 
   &__avatar {
     width: 3rem;
+  }
+
+  &__mobile-menu-btn,
+  &__close-mobile-menu-btn {
+    @include button;
+
+    @include mediaQuery("sm") {
+      display: flex;
+    }
+
+    display: none;
   }
 }

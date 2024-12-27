@@ -8,21 +8,27 @@ header.header
         span.header__logo__square
           +playIcon
         span.header__logo__text Ohtube
-    h1.pageTitle=pageTitle
+    button#mobile-menu-btn.header__mobile-menu-btn
+      +bars3Icon
+      | menu
     div.header__col.header__col--right
-      nav.header__nav
-        ul  
-          li
-            a(href="/search") Search
-          if loggedIn
+      div.header__menu
+        button#close-mobile-menu-btn.header__close-mobile-menu-btn
+          +xMarkIcon
+          | close
+        nav.header__nav
+          ul  
             li
-              a(href="/videos/upload") Upload Video
-            li
-              a(href="/users/logout") Logout
-          else
-            li
-              a(href="/join") Join
-            li
-              a(href="/login") Login
-      if loggedIn
-        +avatar(loggedInUser, 'header__avatar')
+              a(href="/search") Search
+            if loggedIn
+              li
+                a(href="/videos/upload") Upload Video
+              li
+                a(href="/users/logout") Logout
+            else
+              li
+                a(href="/join") Join
+              li
+                a(href="/login") Login
+        if loggedIn
+          +avatar(loggedInUser, 'header__avatar')
